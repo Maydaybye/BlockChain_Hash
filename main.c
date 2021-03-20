@@ -67,7 +67,7 @@ void Insert(Hash_table* h, Element k)
 		(q->data)->value = k.value;
 		int position;
 		position =  hash(k.key);
-		q->next = h->head[position].next;//头插新节点，最后一个节点默认指向NULL
+		q->next = h->head[position].next;//头插新节点，尾节点指向NULL
 		h->head[position].next = q;
 
 		h->length += 1;
