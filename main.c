@@ -7,7 +7,7 @@ typedef struct element
 {
 	int key;
 	int value;
-	int hash;
+	
 }Element;
 
 typedef struct Pnode
@@ -66,7 +66,7 @@ void Insert(Hash_table* h, Element k)
 		(q->data)->key = k.key;
 		(q->data)->value = k.value;
 		int position;
-		position = (q->data)->hash = hash(k.key);
+		position =  hash(k.key);
 		q->next = h->head[position].next;//头插新节点，最后一个节点默认指向NULL
 		h->head[position].next = q;
 
