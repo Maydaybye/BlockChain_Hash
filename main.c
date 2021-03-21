@@ -7,20 +7,28 @@ typedef struct element
 {
 	int key;
 	int value;
-	int hash;
+	
 }Element;
 
 typedef struct Pnode
 {
 	Element* data;
-	struct Pnode* next;
+	int hashcode;
 }Node;
+
+typedef struct Block_List
+{
+	int length;
+	Node Block[length];
+	Node* lastAdd=&Block[length-1];
+}Block;
 
 typedef struct hash_table
 {
 	int size;
 	int length;
-	struct Pnode* head;
+	struct Block head;
+	bool flag=0;
 }Hash_table;
 
 
@@ -33,25 +41,26 @@ Hash_table* Creat_Table(int table_size)
 {
 	Hash_table* h = (Hash_table*)malloc(sizeof(Hash_table));
 	h->size = REMAINDER;
-	h->head = (Node*)malloc((h->size) * sizeof(Node));
+	h->head = (Node*)malloc((h->size) * sizeof(Block));
 	h->length = 0;
 	int i = 0;
 	for (i = 0; i < h->size; i++)
 	{
-		h->head[i].next = NULL;
+		h->head[i].lastAdd = NULL;
 	}
 	return h;
 }
 
 Node* lookup(Hash_table* h, int key)
 {
-	int i;
-	i = hash(key);
-	Node* p = h->head[i].next;
-	while (p && key != p->data->key)
+	int i,hashcode;
+	i = hashcode = hash(key);
+	Block* p = h+i;
+	for(int i=0;p&&key!=p.Block[0].date.key)
+	/*while (p && key != p->data->key)
 	{
 		p = p->next;
-	}
+	}*/
 
 	return p;
 }
