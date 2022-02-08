@@ -1,7 +1,7 @@
   #include<stdio.h>
 #include<stdlib.h>
 
-#define REMAINDER 11	// 通常是质数
+#define REMAINDER 13	// 通常是质数
 
 typedef struct element
 {
